@@ -11,12 +11,13 @@
       </div>
     </div>
     <div v-else>
-      <header-top v-if="auth"></header-top>
+      <header-top v-if="isAuthenticated"></header-top>
       <Nuxt />
     </div>
   </div>
 </template>
 <script>
+import { mapGetters } from "vuex";
 export default {
   head() {
     return {
@@ -36,8 +37,12 @@ export default {
       loading: true,
     };
   },
+  computed: {
+    ...mapGetters({ isAuthenticated: "localStorage/isauthenticated" }),
+  },
 };
 </script>
+
 <style>
 *,
 *::before,

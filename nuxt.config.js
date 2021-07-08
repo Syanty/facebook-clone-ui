@@ -22,6 +22,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    '@/plugins/swal-helpers'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -37,10 +38,14 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    'vue-sweetalert2/nuxt',
+    'nuxt-vuex-localstorage'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: {
+    baseURL: 'http://127.0.0.1:5000/api/v1'
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {

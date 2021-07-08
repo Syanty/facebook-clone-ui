@@ -4,6 +4,7 @@
     class="w-11/12 p-3 rounded-md focus:outline-none"
     placeholder="Password"
     v-model="password_data"
+    required
     @input="$emit('updatedPassword', password_data)"
   />
 </template>

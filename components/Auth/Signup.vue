@@ -11,8 +11,8 @@
       ></input-last-name>
     </div>
     <input-username
-      :username="user.username"
-      @updatedUsername="user.username = $event"
+      :username="user.email"
+      @updatedUsername="user.email = $event"
     ></input-username>
     <div class="flex w-full mb-4 border border-gray-300 rounded-md">
       <input-password
@@ -61,19 +61,34 @@
           class="flex items-center justify-between p-2 border border-gray-300 rounded-md "
         >
           <label>Female</label>
-          <input type="radio" value="female" v-model="gender" class="w-4 h-4" />
+          <input
+            type="radio"
+            value="female"
+            v-model="user.gender"
+            class="w-4 h-4"
+          />
         </div>
         <div
           class="flex items-center justify-between p-2 border border-gray-300 rounded-md "
         >
           <label>Male</label>
-          <input type="radio" value="male" v-model="gender" class="w-4 h-4" />
+          <input
+            type="radio"
+            value="male"
+            v-model="user.gender"
+            class="w-4 h-4"
+          />
         </div>
         <div
           class="flex items-center justify-between p-2 border border-gray-300 rounded-md "
         >
           <label>Other</label>
-          <input type="radio" value="other" v-model="gender" class="w-4 h-4" />
+          <input
+            type="radio"
+            value="other"
+            v-model="user.gender"
+            class="w-4 h-4"
+          />
         </div>
       </div>
     </div>
@@ -110,12 +125,14 @@ export default {
       month: new Date().getMonth(),
       year: new Date().getFullYear(),
       yearLimit: "",
-      gender: "",
+
       user: {
         first_name: "",
         last_name: "",
-        username: "",
+        email: "",
         password: "",
+        birth_date: "",
+        gender: "",
       },
       isVisible: false,
     };

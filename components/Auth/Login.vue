@@ -2,10 +2,11 @@
   <form
     class="w-11/12 p-6 mx-auto mb-10 bg-white rounded-lg lg:w-9/12"
     method="post"
+    @submit.prevent="onLogin"
   >
     <input-username
-      :username="username"
-      @updatedUsername="username = $event"
+      :username="email"
+      @updatedUsername="email = $event"
     ></input-username>
     <div class="flex w-full border border-gray-300 rounded-md">
       <input-password
@@ -42,13 +43,27 @@ export default {
   data() {
     return {
       isVisible: false,
-      username: "",
+      email: "",
       password: "",
     };
   },
   methods: {
     showRegisterModal() {
       this.$emit("showRegisterModal", true);
+    },
+    onLogin() {
+      this.$axios
+        .$post("/account/login/", {
+          email: this.email,
+          password: this.password,
+        })
+        .then((res) => {
+          this.$store.commit("localStorage/storeToken", res.token);
+          this.$success(res.message);
+        })
+        .catch((err) => {
+          this.$error(err.response.data.message);
+        });
     },
   },
   computed: {

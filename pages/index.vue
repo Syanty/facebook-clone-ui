@@ -1,7 +1,9 @@
 <template>
   <div>
     <!-- authenticated stuff -->
-    <div v-if="auth">my posts</div>
+    <div v-if="isAuthenticated">
+      <home-page></home-page>
+    </div>
 
     <!-- unauthenticated -->
     <div v-else>
@@ -11,12 +13,10 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
-  data() {
-    return {
-      auth: false,
-    };
+  computed: {
+    ...mapGetters({ isAuthenticated: "localStorage/isauthenticated" }),
   },
-  layout: "default",
 };
 </script>

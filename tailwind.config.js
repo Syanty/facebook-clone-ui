@@ -10,7 +10,11 @@ module.exports = {
   theme: {
     extend: {
       spacing: {
-        500: "500px"
+        500: "500px",
+        90: "90vh"
+      },
+      rotate: {
+        '-70': '-70deg'
       }
     },
   },
