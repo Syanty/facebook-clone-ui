@@ -13,13 +13,17 @@ module.exports = {
         500: "500px",
         90: "90vh"
       },
+
       rotate: {
         '-70': '-70deg'
       }
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      opacity: ['disabled'],
+      cursor: ['disabled', 'hover']
+    },
   },
   plugins: [
     require('tailwindcss-debug-screens'),

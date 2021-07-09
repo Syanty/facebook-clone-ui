@@ -26,6 +26,31 @@
     </div>
   </div>
 </template>
+<script>
+import { mapGetters } from "vuex";
+export default {
+  data() {
+    return {
+      user: {},
+    };
+  },
+  async fetch() {
+    this.user = await this.$axios
+      .$get("/account/user/profile/", {
+        params: {
+          secret_token: this.token,
+        },
+      })
+      .then((res) => {
+        this.$store.commit("user/storeUserInfo", res.user);
+        return res.user;
+      });
+  },
+  computed: {
+    ...mapGetters({ token: "localStorage/getToken" }),
+  },
+};
+</script>
 <style scoped>
 .logo {
   border-bottom: none;

@@ -2,7 +2,7 @@
   <div>
     <!-- authenticated stuff -->
     <div v-if="isAuthenticated">
-      <home-page></home-page>
+      <home-base></home-base>
     </div>
 
     <!-- unauthenticated -->

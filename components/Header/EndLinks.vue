@@ -1,7 +1,7 @@
 <template>
   <div class="flex items-center justify-end">
     <!-- profile info -->
-    <header-profile-link></header-profile-link>
+    <header-profile-link :user="user"></header-profile-link>
     <!-- more items -->
     <div
       class="items-center justify-center hidden w-20 h-12 rounded-lg cursor-pointer  md:flex lg:hidden hover:bg-gray-200"
@@ -30,13 +30,17 @@
         @accountDrop="showAccountDropDown = $event"
       ></icon-account>
     </div>
-    <dropdown-account :dropdown="showAccountDropDown"></dropdown-account>
+    <dropdown-account
+      :user="user"
+      :dropdown="showAccountDropDown"
+    ></dropdown-account>
     <dropdown-menu :dropdown="showMenuDropDown"></dropdown-menu>
     <dropdown-create :dropdown="showCreateDropDown"></dropdown-create>
   </div>
 </template>
 <script>
 export default {
+  props: ["user"],
   data() {
     return {
       showAccountDropDown: false,

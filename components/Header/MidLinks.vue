@@ -17,7 +17,7 @@
           />
         </svg></div
     ></nuxt-link>
-    <nuxt-link to="#videos" class="link">
+    <nuxt-link to="/#videos" class="link">
       <div
         class="flex items-center justify-center w-11/12 h-12 rounded-lg  nav_link"
       >
@@ -33,7 +33,7 @@
         </svg>
       </div>
     </nuxt-link>
-    <nuxt-link to="#store" class="link">
+    <nuxt-link to="/#store" class="link">
       <div
         class="flex items-center justify-center w-11/12 h-12 rounded-lg  nav_link"
       >
@@ -49,7 +49,7 @@
         </svg>
       </div>
     </nuxt-link>
-    <nuxt-link to="#groups" class="link">
+    <nuxt-link to="/#groups" class="link">
       <div
         class="flex items-center justify-center w-11/12 h-12 rounded-lg  nav_link"
       >
