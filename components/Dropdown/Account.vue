@@ -4,6 +4,7 @@
     class="absolute p-4 bg-white rounded-lg shadow-lg w-96 right-4 top-12"
   >
     <nuxt-link
+      v-if="user"
       :to="`/${user.slug}/`"
       class="flex items-center p-2 rounded-md cursor-pointer hover:bg-gray-300"
     >
@@ -38,12 +39,17 @@
   </div>
 </template>
 <script>
-import { mapMutations } from "vuex";
+import { mapMutations, mapGetters } from "vuex";
 export default {
-  props: ["dropdown", "user"],
+  props: ["dropdown"],
   methods: {
     ...mapMutations({
       logoutUser: "localStorage/removeToken",
+    }),
+  },
+  computed: {
+    ...mapGetters({
+      user: "user/getUserInfo",
     }),
   },
 };

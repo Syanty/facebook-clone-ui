@@ -42,7 +42,7 @@
           </div>
         </div>
         <div class="w-full mt-3">
-          <auth-signup></auth-signup>
+          <auth-signup @closeModal="signupForm = false"></auth-signup>
         </div>
       </div>
     </div>

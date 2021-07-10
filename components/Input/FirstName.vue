@@ -2,7 +2,7 @@
   <input
     type="text"
     placeholder="First Name"
-    class="p-3 border border-gray-400 rounded-md focus:outline-none"
+    class="p-3 border border-gray-300 rounded-md focus:outline-none"
     v-model="fname"
     @input="$emit('updatedFname', fname)"
   />

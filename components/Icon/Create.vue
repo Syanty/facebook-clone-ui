@@ -21,21 +21,9 @@ export default {
       this.dropdown = !this.dropdown;
       this.$emit("createDrop", this.dropdown);
     },
-    close(e) {
-      if (!this.$el.contains(e.target)) {
-        this.dropdown = false;
-        this.$emit("createDrop", this.dropdown);
-      }
-    },
   },
   created() {
     this.dropdown = this.showCreateDropDown;
-  },
-  mounted() {
-    document.addEventListener("click", this.close);
-  },
-  beforeDestroy() {
-    document.removeEventListener("click", this.close);
   },
 };
 </script>

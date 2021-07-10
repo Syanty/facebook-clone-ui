@@ -1,5 +1,5 @@
 <template>
-  <div class="p-6 bg-white rounded-lg">
+  <div class="p-6 bg-white rounded-lg" v-if="user">
     <div class="flex items-center">
       <div
         class="w-10 h-10 p-6 mr-2 bg-gray-900 border-2 border-red-600 rounded-full "

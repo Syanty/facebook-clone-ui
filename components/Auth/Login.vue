@@ -5,6 +5,7 @@
     @submit.prevent="onLogin"
   >
     <input-username
+      class="w-full mb-4"
       :username="email"
       @updatedUsername="email = $event"
     ></input-username>

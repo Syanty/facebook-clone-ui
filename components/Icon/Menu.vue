@@ -23,21 +23,9 @@ export default {
       this.dropdown = !this.dropdown;
       this.$emit("menuDrop", this.dropdown);
     },
-    close(e) {
-      if (!this.$el.contains(e.target)) {
-        this.dropdown = false;
-        this.$emit("menuDrop", this.dropdown);
-      }
-    },
   },
   created() {
     this.dropdown = this.showmenuDropDown;
-  },
-  mounted() {
-    document.addEventListener("click", this.close);
-  },
-  beforeDestroy() {
-    document.removeEventListener("click", this.close);
   },
 };
 </script>

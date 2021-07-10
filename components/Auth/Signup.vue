@@ -1,49 +1,74 @@
 <template>
-  <form method="post">
+  <form method="post" @submit.prevent="registerUser">
     <div class="grid grid-cols-2 gap-4 mb-4">
-      <input-first-name
-        :first_name="user.first_name"
-        @updatedFname="user.first_name = $event"
-      ></input-first-name>
-      <input-last-name
-        :last_name="user.last_name"
-        @updatedLname="user.first_name = $event"
-      ></input-last-name>
+      <div class="flex flex-col">
+        <div>
+          <input-first-name
+            class="w-11/12"
+            :first_name="user.first_name"
+            @updatedFname="user.first_name = $event"
+          ></input-first-name>
+          <span class="text-red-500">*</span>
+        </div>
+        <span>{{ errors.first_name }}</span>
+      </div>
+      <div class="flex flex-col">
+        <div>
+          <input-last-name
+            class="w-11/12"
+            :last_name="user.last_name"
+            @updatedLname="user.last_name = $event"
+          ></input-last-name>
+          <span class="text-red-500">*</span>
+        </div>
+        <span>{{ errors.last_name }}</span>
+      </div>
     </div>
-    <input-username
-      :username="user.email"
-      @updatedUsername="user.email = $event"
-    ></input-username>
-    <div class="flex w-full mb-4 border border-gray-300 rounded-md">
-      <input-password
-        :password="user.password"
-        :isVisible="isVisible"
-        @updatedPassword="user.password = $event"
-      ></input-password>
-      <password-visibility
-        @visibility="isVisible = $event"
-        :password="user_password"
-      ></password-visibility>
+    <div class="flex flex-col mb-3">
+      <div class="flex items-center">
+        <input-username
+          class="w-full mr-1"
+          :username="user.email"
+          @updatedUsername="user.email = $event"
+        ></input-username>
+        <span class="text-red-500">*</span>
+      </div>
+      <span>{{ errors.email }}</span>
+    </div>
+    <div class="flex flex-col mb-3">
+      <div class="flex items-center">
+        <div class="flex w-full mr-1 border border-gray-300 rounded-md">
+          <input-password
+            :password="user.password"
+            :isVisible="isVisible"
+            @updatedPassword="user.password = $event"
+          ></input-password>
+          <password-visibility
+            @visibility="isVisible = $event"
+            :password="user_password"
+          ></password-visibility>
+        </div>
+        <span class="text-red-500">*</span>
+      </div>
+      <span>{{ errors.password }}</span>
     </div>
     <div>
-      <label>Birthday</label>
+      <div>
+        <label>Birthday <span class="text-red-500">*</span></label>
+        <span>{{ errors.birth_date }}</span>
+      </div>
       <div class="grid grid-cols-3 gap-4 mt-2">
-        <select
-          class="p-2 bg-white border border-gray-300 rounded-md  focus:outline-none"
-          v-model="day"
-        >
-          <option v-for="i in 31" :value="i" :key="i">
-            {{ i }}
-          </option>
-        </select>
-        <select
-          class="p-2 bg-white border border-gray-300 rounded-md  focus:outline-none"
-          v-model="month"
-        >
-          <option v-for="i in monthList" :value="i" :key="i">
-            {{ i }}
-          </option>
-        </select>
+        <select-birth-day
+          :day="day"
+          :month="month"
+          :year="year"
+          :monthList="monthList"
+          @updatedDay="day = $event"
+        ></select-birth-day>
+        <select-birth-month
+          @updatedMonth="month = $event"
+          :monthList="monthList"
+        ></select-birth-month>
         <select
           class="p-2 bg-white border border-gray-300 rounded-md  focus:outline-none"
           v-model="year"
@@ -55,45 +80,47 @@
       </div>
     </div>
     <div class="mt-4">
-      Gender
+      <div>
+        <label>Gender <span class="text-red-500">*</span></label>
+        <span>{{ errors.gender }}</span>
+      </div>
       <div class="grid grid-cols-3 gap-5 mt-2">
-        <div
-          class="flex items-center justify-between p-2 border border-gray-300 rounded-md "
-        >
-          <label>Female</label>
+        <radio-gender>
+          <label slot="label">Female</label>
           <input
+            slot="input"
             type="radio"
             value="female"
             v-model="user.gender"
             class="w-4 h-4"
           />
-        </div>
-        <div
-          class="flex items-center justify-between p-2 border border-gray-300 rounded-md "
-        >
-          <label>Male</label>
+        </radio-gender>
+        <radio-gender>
+          <label slot="label">Male</label>
           <input
+            slot="input"
             type="radio"
             value="male"
             v-model="user.gender"
             class="w-4 h-4"
           />
-        </div>
-        <div
-          class="flex items-center justify-between p-2 border border-gray-300 rounded-md "
-        >
-          <label>Other</label>
+        </radio-gender>
+        <radio-gender>
+          <label slot="label">Other</label>
           <input
+            slot="input"
             type="radio"
             value="other"
             v-model="user.gender"
             class="w-4 h-4"
           />
-        </div>
+        </radio-gender>
       </div>
     </div>
 
-    <div class="w-3/5 mx-auto mt-4">
+    <div
+      class="absolute w-3/5 mx-auto transform -translate-x-1/2  bottom-1 left-1/2"
+    >
       <button
         class="w-full p-4 text-center text-white bg-green-800 rounded-md"
         type="submit"
@@ -107,6 +134,10 @@
 export default {
   data() {
     return {
+      day: new Date().getDate(),
+      month: new Date().getMonth(),
+      year: new Date().getFullYear(),
+      yearLimit: "",
       monthList: [
         "January",
         "February",
@@ -121,11 +152,6 @@ export default {
         "November",
         "December",
       ],
-      day: new Date().getDate(),
-      month: new Date().getMonth(),
-      year: new Date().getFullYear(),
-      yearLimit: "",
-
       user: {
         first_name: "",
         last_name: "",
@@ -135,16 +161,50 @@ export default {
         gender: "",
       },
       isVisible: false,
+      validation_errors: {},
     };
   },
+  methods: {
+    registerUser() {
+      this.user.birth_date = new Date(this.year, this.month - 1, this.day);
+      this.$axios
+        .$post("/account/signup/", this.user)
+        .then((res) => {
+          this.$emit("closeModal");
+          this.$success(res.message);
+        })
+        .catch((err) => {
+          if (err.response.data.message) {
+            this.$error(err.response.data.message);
+          } else {
+            this.validation_errors = err.response.data;
+            /* for (const key in errors) {
+              if (Object.hasOwnProperty.call(errors, key)) {
+                const element = errors[key];
+                console.log(element);
+                this.errors[key] = element;
+              }
+            } */
+          }
+        });
+    },
+  },
   created() {
-    this.month = this.monthList[this.month];
     this.yearLimit = this.year - 1904;
   },
   computed: {
     user_password() {
       return this.user.password;
     },
+    errors() {
+      return this.validation_errors;
+    },
   },
 };
 </script>
+<style scoped>
+span {
+  color: #ef4444;
+  margin-left: 5px;
+}
+</style>

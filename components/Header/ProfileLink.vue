@@ -1,5 +1,6 @@
 <template>
   <nuxt-link
+    v-if="user"
     :to="`/${user.slug}/`"
     class="items-center hidden p-2 rounded-full cursor-pointer  xl:flex hover:bg-gray-200"
   >
