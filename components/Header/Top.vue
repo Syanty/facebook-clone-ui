@@ -1,5 +1,7 @@
 <template>
-  <div class="sticky top-0 flex items-center w-full bg-white shadow-xl h-14">
+  <div
+    class="sticky top-0 z-40 flex items-center w-full bg-white shadow-xl h-14"
+  >
     <div class="flex items-center w-1/3 h-full">
       <div class="flex items-center w-full pl-3">
         <nuxt-link to="/" class="logo">
