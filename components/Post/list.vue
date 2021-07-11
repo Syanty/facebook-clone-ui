@@ -20,7 +20,6 @@
   </div>
 </template>
 <script>
-import { mapGetters } from "vuex";
 export default {
   data() {
     return {
@@ -38,7 +37,7 @@ export default {
         this.$axios
           .$get("/users/posts/", {
             params: {
-              secret_token: this.token,
+              secret_token: this.$auth.strategy.token.get().slice(7),
             },
           })
           .then((res) => {
@@ -49,7 +48,6 @@ export default {
     },
   },
   computed: {
-    ...mapGetters({ user: "user/getUserInfo", token: "localStorage/getToken" }),
     getPosts() {
       if (
         this.$EventBus.$on("fetchPosts", (status) => {

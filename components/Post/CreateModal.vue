@@ -4,7 +4,7 @@
       class="absolute w-11/12 p-6 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg shadow-lg  sm:w-10/12 md:w-500 h-96 top-1/2 left-1/2"
     >
       <div class="flex items-center justify-between px-2">
-        <div class="flex items-center">
+        <div class="flex items-center" v-if="user">
           <nuxt-link :to="`/${user.slug}/`" class="mr-2">
             <img
               class="object-cover w-12 h-12 rounded-full"
@@ -81,6 +81,7 @@ export default {
       post: {
         content: "",
       },
+      user: "",
     };
   },
   methods: {
@@ -106,7 +107,6 @@ export default {
     },
   },
   computed: {
-    ...mapGetters({ user: "user/getUserInfo", token: "localStorage/getToken" }),
     createModal() {
       this.modal = this.postCreateModal;
       return this.modal;

@@ -33,7 +33,6 @@
   </div>
 </template>
 <script>
-import { mapGetters } from "vuex";
 export default {
   data() {
     return {
@@ -42,20 +41,11 @@ export default {
       searchModal: false,
     };
   },
-  async fetch() {
-    this.user = await this.$axios
-      .$get("/account/user/profile/", {
-        params: {
-          secret_token: this.token,
-        },
-      })
-      .then((res) => {
-        this.$store.commit("user/storeUserInfo", res.user);
-        return res.user;
-      });
+  created() {
+    this.fetchUser();
   },
+
   computed: {
-    ...mapGetters({ token: "localStorage/getToken" }),
     showModal() {
       return this.searchModal;
     },
@@ -63,6 +53,17 @@ export default {
   methods: {
     search() {
       this.searchModal = false;
+    },
+    async fetchUser() {
+      await this.$axios
+        .$get("/account/user/profile/", {
+          params: {
+            secret_token: this.$auth.strategy.token.get().slice(7),
+          },
+        })
+        .then((res) => {
+          this.$auth.setUser(res.user);
+        });
     },
   },
 };

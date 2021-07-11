@@ -16,7 +16,7 @@
 import { mapGetters } from "vuex";
 export default {
   computed: {
-    ...mapGetters({ isAuthenticated: "localStorage/isauthenticated" }),
+    ...mapGetters(["isAuthenticated"]),
   },
 };
 </script>

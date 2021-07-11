@@ -38,7 +38,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters({ isAuthenticated: "localStorage/isauthenticated" }),
+    ...mapGetters(["isAuthenticated"]),
   },
 };
 </script>

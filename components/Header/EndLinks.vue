@@ -12,12 +12,12 @@
     <div class="flex items-center justify-center p-2">
       <!-- menu -->
       <icon-menu
-        :showMenuDropDown="MenuDropdown"
+        :showMenuDropDown="showMenuDropDown"
         @menuDrop="showMenuDropDown = $event"
       ></icon-menu>
       <!-- create -->
       <icon-create
-        :showCreateDropDown="CreateDropdown"
+        :showCreateDropDown="showCreateDropDown"
         @createDrop="showCreateDropDown = $event"
       ></icon-create>
       <!-- messenger -->
@@ -26,13 +26,16 @@
       <icon-notification></icon-notification>
       <!-- account -->
       <icon-account
-        :showAccountDropDown="Accountdropdown"
+        :showAccountDropDown="showAccountDropDown"
         @accountDrop="showAccountDropDown = $event"
       ></icon-account>
     </div>
-    <dropdown-account :dropdown="showAccountDropDown"></dropdown-account>
-    <dropdown-menu :dropdown="showMenuDropDown"></dropdown-menu>
-    <dropdown-create :dropdown="showCreateDropDown"></dropdown-create>
+    <dropdown-account
+      v-if="showAccountDropDown"
+      @closeDropDown="showAccountDropDown = false"
+    ></dropdown-account>
+    <dropdown-menu v-if="showMenuDropDown"></dropdown-menu>
+    <dropdown-create v-if="showCreateDropDown"></dropdown-create>
   </div>
 </template>
 <script>
@@ -43,17 +46,6 @@ export default {
       showMenuDropDown: false,
       showCreateDropDown: false,
     };
-  },
-  computed: {
-    Accountdropdown() {
-      return this.showAccountDropDown;
-    },
-    MenuDropdown() {
-      return this.showMenuDropDown;
-    },
-    CreateDropdown() {
-      return this.showCreateDropDown;
-    },
   },
 };
 </script>

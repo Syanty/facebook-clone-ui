@@ -1,11 +1,8 @@
 <template>
-  <div
-    v-if="dropdown"
-    class="absolute p-4 bg-white rounded-lg shadow-lg w-96 right-4 top-12"
-  >
+  <div class="absolute p-4 bg-white rounded-lg shadow-lg w-96 right-4 top-12">
     <nuxt-link
-      v-if="user"
-      :to="`/${user.slug}/`"
+      v-if="loggedInUser"
+      :to="`/${loggedInUser.slug}/`"
       class="flex items-center p-2 rounded-md cursor-pointer hover:bg-gray-300"
     >
       <div
@@ -13,7 +10,7 @@
       ></div>
       <div>
         <p class="text-lg font-semibold">
-          {{ user.first_name }} {{ user.last_name }}
+          {{ loggedInUser.first_name }} {{ loggedInUser.last_name }}
         </p>
         <span class="text-sm text-gray-400">see your profile</span>
       </div>
@@ -21,8 +18,8 @@
 
     <ul class="pt-4 mt-3 border-t border-gray-400">
       <li
+        @click="logout"
         class="flex items-center p-4 rounded-md cursor-pointer  hover:bg-gray-300"
-        @click="logoutUser"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -39,18 +36,16 @@
   </div>
 </template>
 <script>
-import { mapMutations, mapGetters } from "vuex";
+import { mapGetters } from "vuex";
 export default {
-  props: ["dropdown"],
-  methods: {
-    ...mapMutations({
-      logoutUser: "localStorage/removeToken",
-    }),
-  },
   computed: {
-    ...mapGetters({
-      user: "user/getUserInfo",
-    }),
+    ...mapGetters(["loggedInUser"]),
+  },
+  methods: {
+    async logout() {
+      await this.$auth.logout();
+      this.$success("User is logged Out");
+    },
   },
 };
 </script>

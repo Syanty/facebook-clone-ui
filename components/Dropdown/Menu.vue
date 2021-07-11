@@ -1,6 +1,5 @@
 <template>
   <div
-    v-if="dropdown"
     class="absolute hidden w-1/2 p-6 bg-gray-100 rounded-lg shadow-lg  lg:block h-500 right-4 top-12"
   >
     <span class="text-2xl font-semibold">Menu</span>
@@ -12,8 +11,3 @@
     </div>
   </div>
 </template>
-<script>
-export default {
-  props: ["dropdown"],
-};
-</script>

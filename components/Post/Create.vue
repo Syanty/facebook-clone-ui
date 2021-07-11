@@ -1,5 +1,5 @@
 <template>
-  <div class="p-6 bg-white rounded-lg" v-if="user">
+  <div class="p-6 bg-white rounded-lg" v-if="loggedInUser">
     <div class="flex items-center">
       <div
         class="w-10 h-10 p-6 mr-2 bg-gray-900 border-2 border-red-600 rounded-full "
@@ -10,7 +10,7 @@
       >
         <input
           type="text"
-          :placeholder="`What's on your mind, ${user.first_name}?`"
+          :placeholder="`What's on your mind, ${loggedInUser.first_name}?`"
           class="w-full bg-gray-300 focus:outline-none"
         />
       </div>
@@ -81,10 +81,11 @@ export default {
   data() {
     return {
       postCreateModal: false,
+      user: "",
     };
   },
   computed: {
-    ...mapGetters({ user: "user/getUserInfo" }),
+    ...mapGetters(["isAuthenticated", "loggedInUser", "getToken"]),
     modal() {
       return this.postCreateModal;
     },

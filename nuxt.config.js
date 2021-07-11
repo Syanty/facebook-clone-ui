@@ -40,12 +40,25 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     'vue-sweetalert2/nuxt',
-    'nuxt-vuex-localstorage'
+    '@nuxtjs/auth-next'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     baseURL: 'http://127.0.0.1:5000/api/v1'
+  },
+  //authentication
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: { url: '/account/login/', method: 'post', propertyName: 'data.token' },
+          user: false,
+          logout: false
+        },
+      },
+
+    }
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

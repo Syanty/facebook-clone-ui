@@ -52,15 +52,16 @@ export default {
     showRegisterModal() {
       this.$emit("showRegisterModal", true);
     },
-    onLogin() {
-      this.$axios
-        .$post("/account/login/", {
-          email: this.email,
-          password: this.password,
+    async onLogin() {
+      await this.$auth
+        .loginWith("local", {
+          data: {
+            email: this.email,
+            password: this.password,
+          },
         })
         .then((res) => {
-          this.$store.commit("localStorage/storeToken", res.token);
-          this.$success(res.message);
+          this.$success(res.data.message);
         })
         .catch((err) => {
           this.$error(err.response.data.message);

@@ -165,11 +165,11 @@ export default {
     };
   },
   methods: {
-    registerUser() {
+    async registerUser() {
       this.user.birth_date = new Date(this.year, this.month - 1, this.day);
-      this.$axios
-        .$post("/account/signup/", this.user)
-        .then((res) => {
+      await this.$axios
+        .post("/account/signup/", this.user)
+        .then(async (res) => {
           this.$emit("closeModal");
           this.$success(res.message);
         })
@@ -178,13 +178,6 @@ export default {
             this.$error(err.response.data.message);
           } else {
             this.validation_errors = err.response.data;
-            /* for (const key in errors) {
-              if (Object.hasOwnProperty.call(errors, key)) {
-                const element = errors[key];
-                console.log(element);
-                this.errors[key] = element;
-              }
-            } */
           }
         });
     },
