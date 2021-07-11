@@ -70,6 +70,7 @@
       </div>
     </div>
     <post-create-modal
+      v-if="modal"
       :postCreateModal="modal"
       @closeModal="postCreateModal = $event"
     ></post-create-modal>
@@ -81,12 +82,15 @@ export default {
   data() {
     return {
       postCreateModal: false,
-      user: "",
     };
   },
   computed: {
-    ...mapGetters(["isAuthenticated", "loggedInUser", "getToken"]),
+    ...mapGetters(["loggedInUser"]),
     modal() {
+      this.$EventBus.$on("openCreateModal", () => {
+        this.postCreateModal = true;
+        console.log(this.postCreateModal);
+      });
       return this.postCreateModal;
     },
   },

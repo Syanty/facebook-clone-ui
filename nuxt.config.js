@@ -49,6 +49,13 @@ export default {
   },
   //authentication
   auth: {
+    //custom redirect since login page in home
+    redirect: {
+      login: '/',
+      logout: '/',
+      callback: '/',
+      home: '/'
+    },
     strategies: {
       local: {
         endpoints: {
@@ -59,6 +66,10 @@ export default {
       },
 
     }
+  },
+  //global middleware
+  router: {
+    middleware: ['auth']
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

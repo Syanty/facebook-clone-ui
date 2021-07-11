@@ -3,20 +3,12 @@
     <!-- list of own posts and friends posts -->
 
     <post-skeleton v-if="loading"></post-skeleton>
-
     <post-content
       v-else
       v-for="(post, i) in getPosts"
       :post="post"
       :key="i"
     ></post-content>
-
-    <div
-      v-if="getPosts == '' && loading == false"
-      class="flex items-center justify-center"
-    >
-      No posts to show
-    </div>
   </div>
 </template>
 <script>

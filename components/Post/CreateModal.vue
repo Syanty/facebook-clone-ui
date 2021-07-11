@@ -1,11 +1,11 @@
 <template>
-  <div v-if="createModal" class="fixed inset-0 bg-gray-200 bg-opacity-90">
+  <div class="fixed inset-0 bg-gray-200 bg-opacity-90">
     <div
       class="absolute w-11/12 p-6 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg shadow-lg  sm:w-10/12 md:w-500 h-96 top-1/2 left-1/2"
     >
       <div class="flex items-center justify-between px-2">
-        <div class="flex items-center" v-if="user">
-          <nuxt-link :to="`/${user.slug}/`" class="mr-2">
+        <div class="flex items-center" v-if="loggedInUser">
+          <nuxt-link :to="`/${loggedInUser.slug}/`" class="mr-2">
             <img
               class="object-cover w-12 h-12 rounded-full"
               src="https://images.unsplash.com/photo-1625740137603-0f5606b742af?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=358&q=80"
@@ -15,9 +15,9 @@
           <div class="flex flex-col">
             <p
               class="text-lg font-semibold cursor-pointer"
-              @click="$router.push(`/${user.slug}/`)"
+              @click="$router.push(`/${loggedInUser.slug}/`)"
             >
-              {{ user.first_name }} {{ user.last_name }}
+              {{ loggedInUser.first_name }} {{ loggedInUser.last_name }}
             </p>
             <span class="text-sm text-gray-400">public</span>
           </div>
@@ -43,7 +43,7 @@
       <div class="w-full">
         <textarea
           class="w-full p-4 mt-4 text-lg resize-none  focus:outline-none overscroll-y-auto"
-          :placeholder="`What's on your mind, ${user.first_name}?`"
+          :placeholder="`What's on your mind, ${loggedInUser.first_name}?`"
           rows="7"
           v-model="post.content"
         ></textarea>
@@ -73,7 +73,6 @@
 <script>
 import { mapGetters } from "vuex";
 export default {
-  props: ["postCreateModal"],
   data() {
     return {
       modal: null,
@@ -81,7 +80,6 @@ export default {
       post: {
         content: "",
       },
-      user: "",
     };
   },
   methods: {
@@ -107,10 +105,7 @@ export default {
     },
   },
   computed: {
-    createModal() {
-      this.modal = this.postCreateModal;
-      return this.modal;
-    },
+    ...mapGetters(["loggedInUser"]),
   },
 };
 </script>

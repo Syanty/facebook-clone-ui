@@ -3,7 +3,10 @@
     <span class="text-lg font-semibold">Create</span>
     <ul class="pb-2 mt-2 border-b border-gray-200">
       <li class="rounded-lg hover:bg-gray-200">
-        <nuxt-link to="/create" class="flex items-center p-2">
+        <div
+          @click="$EventBus.$emit('openCreateModal')"
+          class="flex items-center p-2"
+        >
           <span
             class="flex items-center justify-center p-2 bg-gray-300 rounded-full  h-9 w-9"
           >
@@ -19,12 +22,12 @@
             </svg>
           </span>
           <div class="flex-1 ml-2">Post</div>
-        </nuxt-link>
+        </div>
       </li>
     </ul>
     <ul class="mt-2">
       <li class="rounded-lg hover:bg-gray-200">
-        <nuxt-link to="/create" class="flex items-center p-2">
+        <div class="flex items-center p-2">
           <span
             class="flex items-center justify-center p-2 bg-gray-300 rounded-full  h-9 w-9"
           >
@@ -40,7 +43,7 @@
             </svg>
           </span>
           <div class="flex-1 ml-2">Story</div>
-        </nuxt-link>
+        </div>
       </li>
     </ul>
   </div>
