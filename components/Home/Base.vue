@@ -1,12 +1,16 @@
 <template>
-  <div class="w-full h-full mt-5">
-    <div class="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4">
+  <div class="w-full mt-5">
+    <div class="w-full">
       <!-- left sidebar -->
-      <div class="hidden lg:flex"></div>
+      <div class="left-0 hidden w-0 p-4 lg:w-1/5 lg:fixed lg:flex top-14">
+        <bookmarks-list></bookmarks-list>
+      </div>
       <!-- main content  -->
       <home-main></home-main>
       <!-- contacts sidebar-->
-      <div class="hidden md:flex"></div>
+      <div class="fixed right-0 hidden w-1/4 lg:w-1/5 md:flex top-20">
+        <contact-list></contact-list>
+      </div>
     </div>
   </div>
 </template>

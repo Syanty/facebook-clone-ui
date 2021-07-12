@@ -88,7 +88,7 @@ export default {
       this.$axios
         .$post(`/posts/`, this.post, {
           params: {
-            secret_token: this.token,
+            secret_token: this.$auth.strategy.token.get().slice(7),
           },
         })
         .then((res) => {

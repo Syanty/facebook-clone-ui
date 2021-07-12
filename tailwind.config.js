@@ -16,13 +16,17 @@ module.exports = {
 
       rotate: {
         '-70': '-70deg'
+      },
+      inset: {
+        '1/5': '20%'
       }
     },
   },
   variants: {
     extend: {
       opacity: ['disabled'],
-      cursor: ['disabled', 'hover']
+      cursor: ['disabled', 'hover'],
+      overflow: ['hover'],
     },
   },
   plugins: [

@@ -1,5 +1,8 @@
 <template>
-  <div class="flex w-8/12 h-full pt-5 mx-auto border-t border-gray-300">
+  <div
+    class="flex w-8/12 h-full pt-5 mx-auto border-t border-gray-300"
+    id="sticky_tab"
+  >
     <nuxt-link class="rounded-t-lg link" :to="`/${$route.params.slug}/`"
       >Posts</nuxt-link
     >

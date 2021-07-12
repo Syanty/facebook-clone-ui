@@ -11,7 +11,7 @@
         <input
           type="text"
           :placeholder="`What's on your mind, ${loggedInUser.first_name}?`"
-          class="w-full bg-gray-300 focus:outline-none"
+          class="w-full text-xs bg-gray-300 sm:text-base focus:outline-none"
         />
       </div>
     </div>
@@ -89,7 +89,6 @@ export default {
     modal() {
       this.$EventBus.$on("openCreateModal", () => {
         this.postCreateModal = true;
-        console.log(this.postCreateModal);
       });
       return this.postCreateModal;
     },
