@@ -171,7 +171,7 @@ export default {
         .post("/account/signup/", this.user)
         .then(async (res) => {
           this.$emit("closeModal");
-          this.$success(res.message);
+          this.$success(res.data.message);
         })
         .catch((err) => {
           if (err.response.data.message) {

@@ -1,7 +1,7 @@
 <template>
   <friends-grid
-    :showAcceptButton="true"
-    :users="loggedInUser.friends_requests"
+    :users="loggedInUser.friends"
+    :showUnfriendButton="true"
   ></friends-grid>
 </template>
 <script>

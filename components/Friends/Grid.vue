@@ -9,6 +9,8 @@
         :key="i"
         :user="user"
         :showButton="showButton"
+        :showAcceptButton="showAcceptButton"
+        :showUnfriendButton="showUnfriendButton"
       ></friends-card>
     </div>
   </div>
@@ -21,6 +23,6 @@
 </template>
 <script>
 export default {
-  props: ["users", "showButton"],
+  props: ["users", "showButton", "showAcceptButton", "showUnfriendButton"],
 };
 </script>

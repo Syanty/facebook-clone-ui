@@ -11,11 +11,21 @@
       <div v-if="showButton">
         <friends-add-button :userId="user._id"></friends-add-button>
       </div>
+      <div v-if="showAcceptButton">
+        <friends-accept-button :userId="user._id"></friends-accept-button>
+      </div>
+      <div v-if="showUnfriendButton">
+        <friends-unfriend-button
+          :userId="user._id"
+          :first_name="user.first_name"
+          :last_name="user.last_name"
+        ></friends-unfriend-button>
+      </div>
     </div>
   </div>
 </template>
 <script>
 export default {
-  props: ["user", "showButton"],
+  props: ["user", "showButton", "showAcceptButton", "showUnfriendButton"],
 };
 </script>

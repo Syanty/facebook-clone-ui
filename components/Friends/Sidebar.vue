@@ -22,6 +22,7 @@
       <nuxt-link class="link" to="/friends/requests/sent"
         >Sent Requests</nuxt-link
       >
+      <nuxt-link class="link" to="/friends/list/">All friends</nuxt-link>
     </div>
   </div>
 </template>
