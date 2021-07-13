@@ -2,7 +2,7 @@
   <ul class="w-full h-screen hover:overflow-y-auto">
     <h1 class="mb-5 text-lg font-bold">Contacts</h1>
     <li
-      v-for="i in 20"
+      v-for="i in 10"
       :key="i"
       class="flex items-center p-2 rounded-md cursor-pointer hover:bg-gray-400"
     >
