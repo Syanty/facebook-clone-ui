@@ -10,6 +10,9 @@
     <nuxt-link class="link" :to="`/${$route.params.slug}/about/`"
       >About</nuxt-link
     >
+    <nuxt-link class="link" :to="`/${$route.params.slug}/friends/`"
+      >Friends</nuxt-link
+    >
   </div>
 </template>
 
