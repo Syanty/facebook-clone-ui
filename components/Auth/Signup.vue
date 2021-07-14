@@ -69,14 +69,7 @@
           @updatedMonth="month = $event"
           :monthList="monthList"
         ></select-birth-month>
-        <select
-          class="p-2 bg-white border border-gray-300 rounded-md  focus:outline-none"
-          v-model="year"
-        >
-          <option v-for="i in yearLimit" :value="year + 1 - i" :key="i">
-            {{ year + 1 - i }}
-          </option>
-        </select>
+        <select-birth-year @updatedYear="year = $event"></select-birth-year>
       </div>
     </div>
     <div class="mt-4">
@@ -182,9 +175,7 @@ export default {
         });
     },
   },
-  created() {
-    this.yearLimit = this.year - 1904;
-  },
+
   computed: {
     user_password() {
       return this.user.password;
