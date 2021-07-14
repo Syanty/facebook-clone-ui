@@ -10,8 +10,11 @@
         <div class="w-4 h-4 bg-gray-800 rounded-full animate-pulse"></div>
       </div>
     </div>
+    <div v-else-if="$nuxt.isOffline">
+      <no-internet></no-internet>
+    </div>
     <div v-else>
-      <header-top v-if="isAuthenticated"></header-top>
+      <header-top v-if="isAuthenticated"> </header-top>
       <Nuxt />
     </div>
   </div>
@@ -26,6 +29,10 @@ export default {
       },
     };
   },
+  computed: {
+    ...mapGetters(["isAuthenticated"]),
+  },
+
   beforeCreate() {
     setTimeout(() => {
       this.loading = false;
@@ -36,9 +43,6 @@ export default {
       auth: false,
       loading: true,
     };
-  },
-  computed: {
-    ...mapGetters(["isAuthenticated"]),
   },
 };
 </script>

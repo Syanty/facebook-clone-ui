@@ -38,34 +38,39 @@
 export default {
   data() {
     return {
-      user: {},
       showDropDown: false,
       searchModal: false,
     };
   },
-  created() {
-    this.fetchUser();
-  },
-
   computed: {
     showModal() {
       return this.searchModal;
     },
   },
+  async fetch() {
+    await this.$axios
+      .$get("/account/user/profile/", {
+        params: {
+          secret_token: this.$auth.strategy.token.get().slice(7),
+        },
+      })
+      .then((res) => {
+        this.$auth.setUser(res.user);
+      })
+      .catch((err) => {
+        if (err.response.status == 404) {
+          this.$auth.logout();
+        } else {
+          this.$nuxt.error({
+            message: "Something went wrong",
+            statusCode: 500,
+          });
+        }
+      });
+  },
   methods: {
     search() {
       this.searchModal = false;
-    },
-    async fetchUser() {
-      await this.$axios
-        .$get("/account/user/profile/", {
-          params: {
-            secret_token: this.$auth.strategy.token.get().slice(7),
-          },
-        })
-        .then((res) => {
-          this.$auth.setUser(res.user);
-        });
     },
   },
 };
